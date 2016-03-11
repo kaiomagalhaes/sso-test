@@ -64,7 +64,7 @@ run_project_container(){
       -e $UPPERCASE_PROJECT_NAME'_DATABASE_PASSWORD'=postgres \
       -e $UPPERCASE_PROJECT_NAME'_DATABASE_USER'=postgres \
       -v $(pwd):/share \
-      -p 3000:3000 \
+      -p 5000:5000 \
       --link $DB_CONTAINER_NAME:db 4devfriends/$PROJECT_NAME /bin/bash -l
 
     docker_id=$(find_docker_id $PROJECT_CONTAINER_NAME)

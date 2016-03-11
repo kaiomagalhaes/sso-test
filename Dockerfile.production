@@ -9,6 +9,7 @@ MAINTAINER Codelitt, Inc.
 VOLUME ["/share"]
 
 # Install dependencies and rails-api
+
 RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && gem install --no-rdoc --no-ri rails-api \

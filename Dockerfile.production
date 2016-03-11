@@ -1,0 +1,26 @@
+# This is our DEVELOPMENT dockerfile.
+#
+# This uses Codelitt's Ruby 2.2 image found at:
+# https://github.com/codelittinc/dockerfiles/blob/master/ruby/Dockerfile
+FROM codelittinc/ruby:2.2
+MAINTAINER Codelitt, Inc.
+
+# Mount any shared volumes from host to container @ /share
+VOLUME ["/share"]
+
+# Install dependencies and rails-api
+RUN apt-get update \
+    && rm -rf /var/lib/apt/lists/* \
+    && gem install --no-rdoc --no-ri rails-api \
+    && gem install --no-rdoc --no-ri puma
+
+WORKDIR /share
+ADD Gemfile /share/Gemfile
+ADD Gemfile.lock /share/Gemfile.lock
+RUN bundle install
+ADD ./ /share
+
+CMD cp config/database.yml.example config/database.yml
+ENV RAILS_ENV production
+ENV SECRET_KEY_BASE 1c161e0d320d63bcd30aac135fd32dc61b6ff471a30a05856f5331718af296597009df7aa1c40e6c76f9ef57529496106316dc254a6a7482ea98c228fefad3ef
+CMD rails s Puma -b 0.0.0.0 -e production -p 3000

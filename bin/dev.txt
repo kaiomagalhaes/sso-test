@@ -2,7 +2,7 @@
 #MAINTAINER Kaio Magalhães
 
 ####### Project configuration example #######
-PROJECT_NAME=sso
+PROJECT_NAME=ssotest
 PROJECT_MAIN_LANGUAGE=ruby
 #############################################
 

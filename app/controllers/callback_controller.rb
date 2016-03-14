@@ -1,6 +1,6 @@
 class CallbackController < ApplicationController
   def index
-    r = fetch("https://ssocodelitt.azurewebsites.net/api/user?token=#{params[:token]}")
+    r = fetch("https://sso-test-codelitt.azurewebsites.net/api/user?token=#{params[:token]}")
     respond_to do |format|
       format.json { render json:  r.body}
     end

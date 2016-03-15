@@ -9,7 +9,6 @@ class CallbackController < ApplicationController
   def fetch(uri, limit=10)
     resource_uri = URI(uri)
     http = Net::HTTP.new(resource_uri.hostname, resource_uri.port)
-    http.use_ssl = limit == 10
     response = http.get(resource_uri, headers)
     case response
       when Net::HTTPSuccess then

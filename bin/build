@@ -3,5 +3,5 @@ set -e
 rm -f Dockerfile
 cp Dockerfile.production Dockerfile
 cp config/database.yml.example config/database.yml
-docker build -t codelittinc/single-sign-on-test .
+docker build -t codelittinc/single-sign-on-test-prod .
 rm Dockerfile

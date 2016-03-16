@@ -16,7 +16,7 @@ class CallbackController < ApplicationController
       when Net::HTTPRedirection then
         fetch(response['location'], limit - 1)
       else
-        response.error!
+        response
     end
   end
 end

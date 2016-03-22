@@ -4,8 +4,8 @@ class HomeController < ApplicationController
     secret_key = ENV['APP_SECRET']
 
     @toSend = {
-        'secret_key' => secret_key,
-        'access_key' => access_key,
+        'client_secret' => secret_key,
+        'client_id' => access_key,
         'callback_url' => "#{ENV['APP_URL']}/api/sessions/validate"
     }.to_json
 

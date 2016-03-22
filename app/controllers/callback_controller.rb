@@ -1,6 +1,6 @@
 class CallbackController < ApplicationController
   def index
-    request = fetch("#{ENV['APP_URL']}/api/user?token=#{params[:token]}")
+    request = fetch("#{ENV['APP_URL']}/api/session/validate?token=#{params[:token]}")
     respond_to do |format|
       format.json { render json:  request.body}
     end

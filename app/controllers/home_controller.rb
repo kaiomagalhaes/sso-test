@@ -2,21 +2,13 @@ class HomeController < ApplicationController
   def index
     access_key = ENV['APP_KEY']
     secret_key = ENV['APP_SECRET']
+    redirect_uri = 'http://localhost:5000/callback'
 
-    @toSend = {
-        'client_secret' => secret_key,
-        'client_id' => access_key,
-        'callback_url' => "#{ENV['APP_URL']}/api/sessions/validate"
-    }.to_json
-
-    uri = URI.parse("#{ENV['APP_URL']}/api/sessions")
+    uri = URI.parse("#{ENV['APP_URL']}/oauth/authorize?client_id=#{access_key}&secret_key=#{secret_key}&redirect_uri=#{redirect_uri}")
     https = Net::HTTP.new(uri.host,uri.port)
     https.use_ssl = true
     https.verify_mode = OpenSSL::SSL::VERIFY_NONE # read into this
-    req = Net::HTTP::Post.new(uri.path, initheader = {'Content-Type' =>'application/json'})
-    req.body = "#{@toSend}"
-    res = https.request(req)
-
-    @SIGN_IN_URL = JSON.parse(res.body)['redirect_url']
+    res = https.get(uri.to_s)
+    redirect_to res['location']
   end
 end
